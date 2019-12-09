@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -109,7 +110,14 @@ public class FileController extends AbstractController {
 			LOGGER.info("ERROR!: fid: {} file delete fail!", request.getParameter("fid"));
 		}
 	}
-
+	@RequestMapping(value = "/upload3dtiles.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject upload3dtiles(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		return uploadService.save3dtilesFile(request);
+					
+	}
+	
 	@RequestMapping(value = "/uploadGsError.do", method = RequestMethod.POST)
 	public void uploadGsError(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 		uploadService.SaveErrorFile(request);

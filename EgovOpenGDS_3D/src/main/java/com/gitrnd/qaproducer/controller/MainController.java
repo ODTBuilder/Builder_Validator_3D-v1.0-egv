@@ -1,10 +1,12 @@
 package com.gitrnd.qaproducer.controller;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gitrnd.gdsbuilder.geoserver.DTGeoserverManager;
+import com.gitrnd.qaproducer.geoserver.service.GeoserverService;
 import com.gitrnd.qaproducer.preset.domain.Preset;
 import com.gitrnd.qaproducer.preset.service.PresetService;
 import com.gitrnd.qaproducer.user.domain.User;
@@ -24,6 +28,9 @@ public class MainController extends AbstractController {
 
 	@Resource(name = "presetService")
 	PresetService presetService;
+	
+	@Resource(name = "geoService")
+	GeoserverService geoService;
 
 	@RequestMapping(value = "/{locale:en|ko}/locale.do", method = RequestMethod.GET)
 	public String localeMainView(HttpServletRequest request) {
@@ -34,6 +41,30 @@ public class MainController extends AbstractController {
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public ModelAndView mainView(HttpServletRequest request) {
+		
+		
+		
+			
+		
+		
+		
+//	DTGeoserverManager geoserverManager = null;
+//	try {
+//		geoserverManager = new DTGeoserverManager("http://175.116.181.32:9999/geoserver", "admin", "geoserver");
+//	} catch (MalformedURLException e1) {
+//		// TODO Auto-generated catch block
+//		e1.printStackTrace();
+//	}
+//		
+//		try {
+//			geoService.geolayerTo3DTiles(geoserverManager, "node", "nodetest", "gis_osm_buildings", "admin", 50);
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		
+		
 		LOGGER.info("access: /main.do");
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User) getSession(request, EnUserType.GENERAL.getTypeName());

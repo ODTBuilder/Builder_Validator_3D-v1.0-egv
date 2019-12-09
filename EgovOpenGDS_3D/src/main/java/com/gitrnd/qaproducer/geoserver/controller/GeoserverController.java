@@ -44,6 +44,7 @@ import com.gitrnd.gdsbuilder.geoserver.DTGeoserverManager;
 import com.gitrnd.gdsbuilder.geoserver.data.DTGeoserverManagerList;
 import com.gitrnd.gdsbuilder.geoserver.layer.DTGeoGroupLayerList;
 import com.gitrnd.gdsbuilder.geoserver.layer.DTGeoLayerList;
+import com.gitrnd.gdsbuilder.parse.impl.ShpToObjImpl.EnShpToObjHeightType;
 import com.gitrnd.qaproducer.controller.AbstractController;
 import com.gitrnd.qaproducer.geoserver.service.GeoserverLayerProxyService;
 import com.gitrnd.qaproducer.geoserver.service.GeoserverService;
@@ -719,5 +720,56 @@ public class GeoserverController extends AbstractController {
 		User loginUser = (User) getSession(request, EnUserType.GENERAL.getTypeName());
 		DTGeoserverManager geoserverManager = super.getGeoserverManagerToSession(request, loginUser, serverName);
 		return geoserverService.updateGeogigGsStore(geoserverManager, workspace, datastore, branch);
+	}
+
+	@RequestMapping(value = "/requestGeoLayerTo3DTiles.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject requestGeoLayerTo3DTiles(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody JSONObject jsonObject) throws IOException, NumberFormatException, ParseException {
+
+		User loginUser = (User) getSession(request, EnUserType.GENERAL.getTypeName());
+
+		// 필수파라미터
+		String serverName = request.getParameter("serverName");
+		DTGeoserverManager dtGeoserverManager = super.getGeoserverManagerToSession(request, loginUser, serverName);
+		String workspace = request.getParameter("workspace");
+		String datastore = request.getParameter("datastore");
+		String layerName = request.getParameter("layerName");
+		// String srs = (String) request.getParameter("srs");
+		String heightType = request.getParameter("heightType"); // shp 컬럼명(fix)
+																// or
+																// 입력값(default)
+		String paramStr = request.getParameter(heightType);
+
+		// 조건에 따른 파라미터
+		// String defVal = (String) request.getParameter("defVal"); // 입력값
+		// String attribute = (String) request.getParameter("attribute"); // shp
+		// 컬럼명
+
+		if (dtGeoserverManager == null) {
+			response.sendError(603, "Geoserver 세션이 존재하지 않습니다.");
+		} else if (workspace.equals("") || workspace == null || datastore.equals("") || datastore == null
+				|| layerName.equals("") || layerName == null || heightType.equals("") || heightType == null) {
+			response.sendError(601, "미입력 텍스트가 존재합니다.");
+		} else {
+			if (heightType == null) {
+				response.sendError(601, "미입력 텍스트가 존재합니다.");
+			} else if (paramStr.equals("") || paramStr == null) {
+				response.sendError(601, "미입력 텍스트가 존재합니다.");
+			} else {
+				response.sendError(601, "잘못입력한 정보가 있습니다.");
+			}
+		}
+		JSONObject returnJson = new JSONObject();
+		if (heightType.equals(EnShpToObjHeightType.DEFAULT.getType())) {
+			geoserverService.geolayerTo3DTiles(dtGeoserverManager, workspace, datastore, layerName, loginUser.getUid(),
+					Double.valueOf(paramStr));
+		} else if (heightType.equals(EnShpToObjHeightType.FIX.getType())) {
+			geoserverService.geolayerTo3DTiles(dtGeoserverManager, workspace, datastore, layerName, loginUser.getUid(),
+					paramStr);
+		} else {
+
+		}
+		return returnJson;
 	}
 }

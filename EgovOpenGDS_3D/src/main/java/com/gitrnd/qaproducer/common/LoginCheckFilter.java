@@ -26,9 +26,9 @@ public class LoginCheckFilter implements Filter {
 	// 로그인 세션 체크 예외 URL
 	private final static String[] NOT_CHECK_LOGIN_SESSION = { "/resources/", "/main.do", "/user/signin.do",
 			"/user/signup.do", "/user/signout.do", "/user/signinProcess.do", "/uploaderror.do", "/uploadGsError.do",
-			"/upload.do" };
+			"/upload.do", "/upload3dtiles.do","/downloadzip.do" };
 	private final static String[] CHECK_USER_SESSION = { "/", "/map.do", "/web/validate.do", "/validation.do", "/list.do",
-			"/setting.do", "/createpreset.do", "/settinglist.do", "/option/", "/downloadzip.do", "/downloaderror.do",
+			"/setting.do", "/createpreset.do", "/settinglist.do", "/option/", "/downloaderror.do",
 			"/geoserver/", "/file/", "/user/userinfo.do", "/user/deactivateuser.ajax", "/geogig/", "/result/",
 			"/deleteList.ajax" };
 
