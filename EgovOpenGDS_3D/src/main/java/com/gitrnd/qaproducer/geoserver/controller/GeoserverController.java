@@ -730,43 +730,26 @@ public class GeoserverController extends AbstractController {
 		User loginUser = (User) getSession(request, EnUserType.GENERAL.getTypeName());
 
 		// 필수파라미터
-		String serverName = request.getParameter("serverName");
+		String serverName = (String) jsonObject.get("serverName");
 		DTGeoserverManager dtGeoserverManager = super.getGeoserverManagerToSession(request, loginUser, serverName);
-		String workspace = request.getParameter("workspace");
-		String datastore = request.getParameter("datastore");
-		String layerName = request.getParameter("layerName");
+		String workspace = (String) jsonObject.get("workspace");
+		String datastore = (String) jsonObject.get("datastore");
+		String layerName = (String) jsonObject.get("layerName");
+		String geom = (String) jsonObject.get("geometry2d");
 		// String srs = (String) request.getParameter("srs");
-		String heightType = request.getParameter("heightType"); // shp 컬럼명(fix)
-																// or
-																// 입력값(default)
-		String paramStr = request.getParameter(heightType);
+		String heightType = (String) jsonObject.get("depthType"); // shp
+																	// 컬럼명(fix)
+																	// or
+																	// 입력값(default)
+		String paramStr = (String) jsonObject.get("depthValue");
 
-		// 조건에 따른 파라미터
-		// String defVal = (String) request.getParameter("defVal"); // 입력값
-		// String attribute = (String) request.getParameter("attribute"); // shp
-		// 컬럼명
-
-		if (dtGeoserverManager == null) {
-			response.sendError(603, "Geoserver 세션이 존재하지 않습니다.");
-		} else if (workspace.equals("") || workspace == null || datastore.equals("") || datastore == null
-				|| layerName.equals("") || layerName == null || heightType.equals("") || heightType == null) {
-			response.sendError(601, "미입력 텍스트가 존재합니다.");
-		} else {
-			if (heightType == null) {
-				response.sendError(601, "미입력 텍스트가 존재합니다.");
-			} else if (paramStr.equals("") || paramStr == null) {
-				response.sendError(601, "미입력 텍스트가 존재합니다.");
-			} else {
-				response.sendError(601, "잘못입력한 정보가 있습니다.");
-			}
-		}
 		JSONObject returnJson = new JSONObject();
 		if (heightType.equals(EnShpToObjHeightType.DEFAULT.getType())) {
-			geoserverService.geolayerTo3DTiles(dtGeoserverManager, workspace, datastore, layerName, loginUser.getUid(),
-					Double.valueOf(paramStr));
+			returnJson = geoserverService.geolayerTo3DTiles(dtGeoserverManager, workspace, datastore, layerName,
+					loginUser.getUid(), Double.valueOf(paramStr));
 		} else if (heightType.equals(EnShpToObjHeightType.FIX.getType())) {
-			geoserverService.geolayerTo3DTiles(dtGeoserverManager, workspace, datastore, layerName, loginUser.getUid(),
-					paramStr);
+			returnJson = geoserverService.geolayerTo3DTiles(dtGeoserverManager, workspace, datastore, layerName,
+					loginUser.getUid(), paramStr);
 		} else {
 
 		}

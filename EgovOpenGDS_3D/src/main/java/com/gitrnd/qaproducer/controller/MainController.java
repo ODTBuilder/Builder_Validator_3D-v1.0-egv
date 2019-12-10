@@ -42,12 +42,6 @@ public class MainController extends AbstractController {
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public ModelAndView mainView(HttpServletRequest request) {
 		
-		
-		
-			
-		
-		
-		
 //	DTGeoserverManager geoserverManager = null;
 //	try {
 //		geoserverManager = new DTGeoserverManager("http://175.116.181.32:9999/geoserver", "admin", "geoserver");
@@ -57,13 +51,12 @@ public class MainController extends AbstractController {
 //	}
 //		
 //		try {
-//			geoService.geolayerTo3DTiles(geoserverManager, "node", "nodetest", "gis_osm_buildings", "admin", 50);
+//			geoService.geolayerTo3DTiles(geoserverManager, "node", "nodetest", "gis_osm_buildings_3052", "admin", 50);
 //		} catch (ParseException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
-		
+//		
 		
 		LOGGER.info("access: /main.do");
 		ModelAndView mav = new ModelAndView();
