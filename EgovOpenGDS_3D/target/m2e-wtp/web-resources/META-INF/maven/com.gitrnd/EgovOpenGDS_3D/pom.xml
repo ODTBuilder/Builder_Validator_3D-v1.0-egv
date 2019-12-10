@@ -92,21 +92,21 @@
 			<artifactId>kabeja</artifactId>
 			<version>0.4</version>
 			<scope>system</scope>
-    		<systemPath>${project.basedir}/libs/com/kabeja/0.4/kabeja-0.4.jar</systemPath>
+			<systemPath>${project.basedir}/libs/com/kabeja/0.4/kabeja-0.4.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com</groupId>
 			<artifactId>kabeja-svg</artifactId>
 			<version>0.4</version>
 			<scope>system</scope>
-    		<systemPath>${project.basedir}/libs/com/kabeja-svg/0.4/kabeja-svg-0.4.jar</systemPath>
+			<systemPath>${project.basedir}/libs/com/kabeja-svg/0.4/kabeja-svg-0.4.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com</groupId>
 			<artifactId>gt-datastore-ngi</artifactId>
 			<version>1.0.0</version>
 			<scope>system</scope>
-    		<systemPath>${project.basedir}/libs/com/gt-datastore-ngi/1.0.0/gt-datastore-ngi-1.0.0.jar</systemPath>
+			<systemPath>${project.basedir}/libs/com/gt-datastore-ngi/1.0.0/gt-datastore-ngi-1.0.0.jar</systemPath>
 		</dependency>
 
 		<!-- 표준프레임워크 실행환경 -->
@@ -136,9 +136,6 @@
 			<artifactId>egovframework.rte.fdl.property</artifactId>
 			<version>${egovframework.rte.version}</version>
 		</dependency>
-
-
-
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -172,36 +169,36 @@
 		</dependency>
 
 		<!-- 추가부분 -->
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.springframework</groupId> -->
-<!-- 		    <artifactId>spring-context</artifactId> -->
-<!-- 		    <version>4.2.4.RELEASE</version> -->
-<!-- 		</dependency> -->
-		
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework</groupId> -->
+		<!-- <artifactId>spring-context</artifactId> -->
+		<!-- <version>4.2.4.RELEASE</version> -->
+		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>de.javagl</groupId>
 			<artifactId>obj</artifactId>
 			<version>0.3.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven -->
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok-maven</artifactId>
-		    <version>1.16.20.0</version>
-		    <type>pom</type>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok-maven</artifactId>
+			<version>1.16.20.0</version>
+			<type>pom</type>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.16.20</version>
-		    <scope>provided</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.20</version>
+			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- MyBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -336,6 +333,36 @@
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-wfs</artifactId>
 			<version>16.5</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/de.javagl/jgltf-obj -->
+		<dependency>
+			<groupId>de.javagl</groupId>
+			<artifactId>jgltf-obj</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/de.javagl/jgltf-model -->
+		<dependency>
+			<groupId>de.javagl</groupId>
+			<artifactId>jgltf-model</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.orbisgis/poly2tri -->
+		<dependency>
+			<groupId>org.orbisgis</groupId>
+			<artifactId>poly2tri</artifactId>
+			<version>0.1.2</version>
+			<type>pom</type>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.orbisgis/poly2tri-core -->
+		<dependency>
+			<groupId>org.orbisgis</groupId>
+			<artifactId>poly2tri-core</artifactId>
+			<version>0.1.2</version>
 		</dependency>
 
 
