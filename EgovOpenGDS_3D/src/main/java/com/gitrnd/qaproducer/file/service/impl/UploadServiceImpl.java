@@ -33,7 +33,7 @@ import com.gitrnd.qaproducer.user.domain.User;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
 @Service("uploadService")
-public class UploadServiceImpl extends EgovAbstractServiceImpl implements UploadService{
+public class UploadServiceImpl extends EgovAbstractServiceImpl implements UploadService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UploadServiceImpl.class);
 
@@ -42,6 +42,8 @@ public class UploadServiceImpl extends EgovAbstractServiceImpl implements Upload
 	private static final String port;
 	private static final String contextPath;
 	private static final String baseDrive;
+	private static final String apacheHost;
+	private static final String apachePort;
 
 	static {
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -57,6 +59,9 @@ public class UploadServiceImpl extends EgovAbstractServiceImpl implements Upload
 		port = properties.getProperty("port");
 		contextPath = properties.getProperty("contextPath");
 		baseDrive = properties.getProperty("basedrive");
+
+		apacheHost = properties.getProperty("apacheHost");
+		apachePort = properties.getProperty("apachePort");
 	}
 
 	@Resource(name = "fileStatusService")
@@ -181,21 +186,21 @@ public class UploadServiceImpl extends EgovAbstractServiceImpl implements Upload
 			}
 		}
 	}
-	
+
 	@Override
 	public JSONObject save3dtilesFile(MultipartHttpServletRequest request) throws Exception {
 
 		boolean succ = true;
-		
 		JSONObject obj = new JSONObject();
-		
-
 		String user = request.getParameter("user");
 		String time = request.getParameter("time");
 
-		String basePath = baseDrive + ":" + File.separator + baseDir;
+		String basePath = baseDrive + ":/" + baseDir;
 		String uploadPath = basePath + File.separator + user + File.separator + "upload" + File.separator + time
 				+ File.separator + "3dtiles";
+
+		String apachePath = "http://" + apacheHost + ":" + apachePort + File.separator + user + File.separator
+				+ "upload" + File.separator + time + File.separator + "3dtiles" + File.separator + "tileset.json";
 
 		File path = new File(uploadPath);
 		if (!path.exists()) {
@@ -232,12 +237,13 @@ public class UploadServiceImpl extends EgovAbstractServiceImpl implements Upload
 				succ = false;
 			}
 		}
-		
+
 		obj.put("succ", succ);
-		obj.put("path", uploadPath);
-		
+		obj.put("path", apachePath);
+
 		return obj;
 	}
+
 	private void decompress(String zipFileName, String directory) throws Throwable {
 
 		File zipFile = new File(zipFileName);
@@ -274,8 +280,10 @@ public class UploadServiceImpl extends EgovAbstractServiceImpl implements Upload
 	/**
 	 * 파일 만들기 메소드
 	 * 
-	 * @param file 파일
-	 * @param zis  Zip스트림
+	 * @param file
+	 *            파일
+	 * @param zis
+	 *            Zip스트림
 	 */
 	private void createFile(File file, ZipInputStream zis) throws Throwable {
 		// 디렉토리 확인
