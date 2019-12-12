@@ -199,8 +199,8 @@ public class UploadServiceImpl extends EgovAbstractServiceImpl implements Upload
 		String uploadPath = basePath + File.separator + user + File.separator + "upload" + File.separator + time
 				+ File.separator + "3dtiles";
 
-		String apachePath = "http://" + apacheHost + ":" + apachePort + File.separator + user + File.separator
-				+ "upload" + File.separator + time + File.separator + "3dtiles" + File.separator + "tileset.json";
+		String apachePath = "http://" + apacheHost + ":" + "/" + user + "/" + "upload" + "/" + time + "/" + "3dtiles"
+				+ "/" + "tileset.json";
 
 		File path = new File(uploadPath);
 		if (!path.exists()) {
