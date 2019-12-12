@@ -269,7 +269,7 @@ html, body {
 			locale : locale,
 			saveURL : "geoserver/tilesave.ajax"
 		});
-		
+
 		var frecord = new gb.edit.FeatureRecord({
 			//id : "feature_id",
 			locale : locale,
@@ -277,12 +277,12 @@ html, body {
 			layerInfoURL : urlList.getLayerInfo + urlList.token,
 			modelRecord : mrecord
 		});
-		
+
 		var tilesDownloader = new gb3d.io.TilesDownloader({
 			"locale" : locale || "en",
 			"downloadTilesUrl" : "geoserver/tilesdownload.ajax"
 		});
-		
+
 		var otree = new gb3d.tree.OpenLayers({
 			"locale" : locale || "en",
 			"append" : $(".builderLayerClientPanel")[0],
@@ -315,14 +315,14 @@ html, body {
 			})
 		});
 		gb3dMap.addTileset(tiles); */
-		
+
 		var uploadSHP = new gb.geoserver.UploadSHP({
 			"url" : urlList.geoserverFileUpload + urlList.token,
 			"locale" : locale !== "" ? locale : "en"
 		});
 
 		var simple3d = new gb3d.io.Simple3DManager({
-			"url" : undefined,
+			"url" : "geoserver/requestGeoLayerTo3DTiles.ajax",
 			"layerInfoUrl" : "geoserver/getGeoLayerInfoList.ajax",
 			"locale" : locale !== "" ? locale : "en",
 			"gb3dMap" : gb3dMap,
@@ -367,7 +367,7 @@ html, body {
 				"geoserverInfo" : "geoserver/getDTGeoserverInfo.ajax"
 			}
 		});
-		
+
 		var epan;
 		// editing Tool 3D
 		epan3d = new gb3d.edit.EditingTool3D({
@@ -380,7 +380,7 @@ html, body {
 				return epan;
 			}
 		});
-		
+
 		// EditTool 활성화
 		epan = new gb3d.edit.EditingTool2D({
 			targetElement : gbMap.getLowerDiv()[0],
@@ -417,7 +417,7 @@ html, body {
 			var instance = threeTree.jstree;
 			var parent = data.parent;
 			var node = data.node;
-			
+
 			if(!instance.get_node(node.id)){
 				instance.create_node(parent, node.original, "last", false, false);
 			}
