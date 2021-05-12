@@ -11,7 +11,7 @@
 
 
 	<properties>
-		<spring.maven.artifact.version>4.2.4.RELEASE</spring.maven.artifact.version>
+		<spring.maven.artifact.version>5.2.10.RELEASE</spring.maven.artifact.version>
 		<egovframework.rte.version>3.7.0</egovframework.rte.version>
 
 		<!-- 추가부분 -->
